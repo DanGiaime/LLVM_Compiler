@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+using namespace std;
+
 //This is the Lexer.
 //This takes our input program as a giant string,
 //and converts it into understandable tokens.
@@ -17,7 +22,7 @@ enum Token {
 };
 
 //Will hold var name if identifier
-static std::string IdentifierStr;
+static string IdentifierStr;
 
 //Will hold number value if number literal
 static double NumVal;
@@ -31,18 +36,18 @@ static int gettok ( ) {
 
     //Skip whitespace
     while ( isspace ( LastChar ) ) {
-        LastChar = getChar();
+        LastChar = getchar();
     }
 
     //Recognize Identifiers
-    if ( isaplha ( LastChar ) ) {
+    if ( isalpha ( LastChar ) ) {
         
         //Initialize identifier as first character
         IdentifierStr = LastChar;
 
         //Grab the full identifier
         while ( isalnum ( LastChar = getchar() ) ) {
-            IndentifierStr += LastChar;
+            IdentifierStr += LastChar;
         }
         
         //Check for keywords before assuming it's a var
@@ -59,7 +64,7 @@ static int gettok ( ) {
     //Recognizes Number literals (poorly. TODO: Improve)
     if ( isdigit ( LastChar ) || LastChar == '.' ) {
         //Prep a string to hold the number
-        std::string NumStr;
+        string NumStr;
         
         //Get the entire number
         do {
